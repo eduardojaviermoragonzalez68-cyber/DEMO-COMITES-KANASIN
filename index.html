@@ -1,1 +1,230 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO NO OFICIAL CEN MORENA | Ayuntamiento Austero y Comités Kanasín 2027</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --guinda: #7B1E34;
+            --guinda-oscuro: #541121;
+            --dorado: #B38E5D;
+            --crema: #F9F6F2;
+            --texto: #222222;
+            --gris: #5A626A;
+            --blanco: #FFFFFF;
+            --alerta-bg: #FFF3CD;
+            --alerta-borde: #FFEEBA;
+            --sombra: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transicion: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--crema); color: var(--texto); line-height: 1.6; }
+        h1, h2, h3, h4, .btn { font-family: 'Montserrat', sans-serif; }
 
+        /* Cintillo Legal Obligatorio */
+        .cintillo-legal { background-color: #1A1A1A; color: #F1F1F1; font-size: 0.78rem; padding: 10px 5%; text-align: center; border-bottom: 3px solid var(--dorado); }
+        .cintillo-legal strong { color: #FFD166; }
+
+        /* Header */
+        header { background-color: var(--guinda); color: var(--blanco); padding: 1rem 5%; position: sticky; top: 0; z-index: 1000; box-shadow: var(--sombra); }
+        .header-wrap { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .brand-tag { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.4px; color: var(--dorado); font-weight: 700; }
+        .brand-title { font-size: 1.15rem; font-weight: 800; }
+        nav ul { list-style: none; display: flex; gap: 1.3rem; flex-wrap: wrap; }
+        nav a { color: var(--blanco); text-decoration: none; font-size: 0.85rem; font-weight: 600; padding-bottom: 3px; border-bottom: 2px solid transparent; transition: var(--transicion); }
+        nav a:hover { color: var(--dorado); border-bottom-color: var(--dorado); }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--guinda-oscuro) 0%, var(--guinda) 100%); color: var(--blanco); padding: 3.8rem 5%; text-align: center; }
+        .badge { display: inline-block; background: rgba(255, 255, 255, 0.14); border: 1px solid var(--dorado); color: #FFE8C2; padding: 6px 16px; border-radius: 20px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; }
+        .hero h1 { font-size: 2rem; max-width: 920px; margin: 0 auto 1rem; line-height: 1.25; }
+        .hero p { max-width: 800px; margin: 0 auto 2rem; font-size: 0.98rem; opacity: 0.93; }
+        .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 700; font-size: 0.88rem; cursor: pointer; border: none; text-decoration: none; display: inline-block; transition: var(--transicion); }
+        .btn-dorado { background-color: var(--dorado); color: var(--blanco); }
+        .btn-dorado:hover { background-color: #9A7748; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--blanco); color: var(--blanco); }
+        .btn-outline:hover { background: var(--blanco); color: var(--guinda); }
+
+        /* Contenedores y Secciones */
+        .container { max-width: 1240px; margin: 0 auto; padding: 3.5rem 5%; }
+        .sec-header { text-align: center; margin-bottom: 2.3rem; }
+        .sec-header h2 { color: var(--guinda); font-size: 1.7rem; margin-bottom: 0.5rem; }
+        .sec-header p { color: var(--gris); max-width: 760px; margin: 0 auto; font-size: 0.95rem; }
+
+        /* Filtros y Tarjetas Jurídicas */
+        .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+        .tab-btn { padding: 0.6rem 1.1rem; background: var(--blanco); border: 1px solid #DDD; border-radius: 25px; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: var(--transicion); }
+        .tab-btn.active, .tab-btn:hover { background: var(--guinda); color: var(--blanco); border-color: var(--guinda); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
+        .card { background: var(--blanco); border-radius: 8px; padding: 1.5rem; box-shadow: var(--sombra); border-top: 4px solid var(--guinda); }
+        .card.hidden { display: none; }
+        .card-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: var(--crema); color: var(--guinda); margin-bottom: 0.7rem; }
+        .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--guinda-oscuro); }
+        .card ul { padding-left: 1.1rem; font-size: 0.88rem; color: var(--gris); }
+        .card li { margin-bottom: 0.45rem; }
+        .card li strong { color: var(--texto); }
+
+        /* Tabla Ayuntamiento Austero */
+        .table-wrap { overflow-x: auto; background: var(--blanco); border-radius: 8px; box-shadow: var(--sombra); border-top: 4px solid var(--dorado); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; }
+        th { background-color: var(--guinda); color: var(--blanco); padding: 1rem; font-family: 'Montserrat', sans-serif; font-size: 0.82rem; text-transform: uppercase; }
+        td { padding: 0.95rem 1rem; border-bottom: 1px solid #EAEAEA; vertical-align: top; }
+        tr:nth-child(even) { background-color: #FCFBF9; }
+        .badge-ahorro { display: inline-block; background: #E6F4EA; color: #137333; font-weight: 700; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; }
+
+        /* Formulario Demo */
+        .form-box { background: var(--blanco); border-radius: 10px; padding: 2.2rem; box-shadow: var(--sombra); max-width: 760px; margin: 0 auto; border-left: 5px solid var(--guinda); }
+        .alerta { background: var(--alerta-bg); border: 1px solid var(--alerta-borde); padding: 1rem; border-radius: 6px; font-size: 0.84rem; margin-bottom: 1.5rem; color: #664D03; }
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.86rem; margin-bottom: 0.35rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #CCC; border-radius: 6px; font-family: inherit; font-size: 0.92rem; }
+        #msg-ok { display: none; margin-top: 1rem; padding: 1rem; background: #D1E7DD; color: #0F5132; border-radius: 6px; font-weight: 600; text-align: center; }
+
+        /* Footer */
+        footer { background: var(--guinda-oscuro); color: #F1F1F1; text-align: center; padding: 2.2rem 5%; font-size: 0.84rem; margin-top: 3rem; border-top: 4px solid var(--dorado); }
+        footer p { max-width: 860px; margin: 0 auto 0.5rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.6rem; } .header-wrap { justify-content: center; text-align: center; } }
+    </style>
+
+  <body>
+    <div class="cintillo-legal">
+        <strong>DOCUMENTO DE TRABAJO INTERNO NO OFICIAL • SOLO DEMO PARA PRESENTACIÓN ANTE EL CEN DE MORENA:</strong> Elaborado en estricto apego a la CPEUM, LGIPE (INE), LIPEEY (IEPAC), Ley de Gobierno de los Municipios de Yucatán y Estatuto de MORENA. No constituye propaganda electoral ni acto anticipado de campaña.
+    </div>
+
+    <header>
+        <div class="header-wrap">
+            <div>
+                <span class="brand-tag">DEMO-AYUNTAMIENTO-2027 • PROPUESTA TÉCNICA CEN</span>
+                <span class="brand-title">Kanasín: Organización y Austeridad</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#blindaje">Blindaje Jurídico</a></li>
+                    <li><a href="#austeridad">Ayuntamiento Austero 2027</a></li>
+                    <li><a href="#participacion">Participación Ciudadana</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <span class="badge">Solo Demo Interna • Presentación Comité Ejecutivo Nacional (CEN)</span>
+        <h1>Modelo de Organización Interna y Reingeniería de Ayuntamiento Austero — Kanasín 2027</h1>
+        <p>Propuesta técnica no oficial que integra el blindaje normativo de los tres niveles de gobierno, los lineamientos estatutarios del Proceso Ordinario Interno de MORENA y la fusión administrativa de direcciones municipales (2024–2027).</p>
+        <div class="btn-group">
+            <a href="#blindaje" class="btn btn-dorado">Revisar Articulado Legal</a>
+            <a href="#austeridad" class="btn btn-outline">Ver Fusión de Direcciones</a>
+        </div>
+    </section>
+
+    <section id="blindaje" class="container">
+        <div class="sec-header">
+            <h2>Blindaje Jurídico Integral (Tres Niveles y Normativa Interna)</h2>
+            <p>Fundamentación legal por artículos e incisos que respalda este ejercicio técnico de planeación interna y participación ciudadana.</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-filter="todos">Todos los Ordenamientos</button>
+            <button class="tab-btn" data-filter="federal">Federal y INE</button>
+            <button class="tab-btn" data-filter="iepac">Estatal (IEPAC)</button>
+            <button class="tab-btn" data-filter="municipios">Ley Municipios Yucatán</button>
+            <button class="tab-btn" data-filter="morena">Estatuto y CEN MORENA</button>
+        </div>
+
+        <div class="grid">
+            <div class="card" data-cat="federal">
+                <span class="card-tag">Nivel Federal • CPEUM y LGIPE (INE)</span>
+                <h3>Constitución y Ley General (INE)</h3>
+                <ul>
+                    <li><strong>CPEUM Art. 9° y 35 Fracc. III:</strong> Garantizan el derecho humano de libre asociación pacífica para tomar parte en los asuntos políticos del país.</li>
+                    <li><strong>CPEUM Art. 115 Fracc. I y II:</strong> Establece la autonomía del Municipio Libre y la facultad reglamentaria y administrativa del Ayuntamiento.</li>
+                    <li><strong>LGIPE Art. 3° Incisos a) y b):</strong> Define y delimita los actos anticipados de campaña y precampaña, excluyendo los trabajos técnicos de planeación interna.</li>
+                    <li><strong>LGIPE Art. 226 y 227:</strong> Regulan los tiempos oficiales de procesos internos y la fiscalización del INE.</li>
+                </ul>
+            </div>
+
+            <div class="card" data-cat="iepac">
+                <span class="card-tag">Nivel Estatal • LIPEEY (IEPAC Yucatán)</span>
+                <h3>Legislación Electoral de Yucatán</h3>
+                <ul>
+                    <li><strong>LIPEEY Art. 46:</strong> Prohibición expresa de realizar actos anticipados de campaña o contratación de propaganda fuera de los plazos legales del IEPAC.</li>
+                    <li><strong>LIPEEY Art. 188 Fracc. I y II:</strong> Regulación del Consejo General del IEPAC sobre procesos internos de selección y control de egresos.</li>
+                    <li><strong>LIPEEY Art. 337 Incisos I y II:</strong> Tipificación de infracciones en materia de posicionamiento anticipado, garantizando que esta demo carece de llamado al voto.</li>
+                </ul>
+            </div>
+
+            <div class="card" data-cat="municipios">
+                <span class="card-tag">Nivel Municipal • Ley de Gobierno Yucatán</span>
+                <h3>Ley de Gobierno de los Municipios</h3>
+                <ul>
+                    <li><strong>Art. 40 y 41 Inciso A) Fracc. I y III:</strong> Facultades del Ayuntamiento para expedir bandos, reglamentos y aprobar su estructura administrativa interna.</li>
+                    <li><strong>Art. 55 y 56 Fracc. I y II:</strong> Atribuciones de la Presidencia Municipal para proponer al Cabildo el nombramiento, fusión o supresión de titulares de dependencias.</li>
+                    <li><strong>Art. 61 y Art. 88 al 93:</strong> Bases de la Administración Pública Municipal Centralizada; permite compactar direcciones para evitar duplicidad de funciones y reducir gasto corriente.</li>
+                </ul>
+            </div>
+
+            <div class="card" data-cat="morena">
+                <span class="card-tag">Normativa Partidista • Estatuto MORENA</span>
+                <h3>Estatuto y Proceso Ordinario Interno</h3>
+                <ul>
+                    <li><strong>Art. 1°, 2° y 3° Incisos a), b) y f):</strong> Principios de austeridad republicana, no mentir, no robar y erradicación de privilegios burocráticos.</li>
+                    <li><strong>Art. 4° Bis y Art. 14° Bis:</strong> Organización territorial de Protagonistas del Cambio Verdadero en Comités de Defensa de la Transformación por sección.</li>
+                    <li><strong>Art. 41° Bis y Art. 44° Incisos a), b), j) y w):</strong> Facultades del CEN y la Comisión Nacional de Elecciones para conducir el Proceso Ordinario Interno mediante consenso y encuesta.</li>
+                    <li><strong>Lineamientos de Participación Ciudadana:</strong> Mecanismos de consulta barrial, presupuesto participativo y contraloría social.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="austeridad" class="container">
+        <div class="sec-header">
+            <h2>Demo: Ayuntamiento Austero 2027 (Fusión de Direcciones 2024–2027)</h2>
+            <p>Propuesta de compactación administrativa para Kanasín conforme a los Arts. 41 y 88 de la Ley de Gobierno de los Municipios de Yucatán: se eliminan direcciones duplicadas de confianza y se reorienta el ahorro a obra pública y servicios.</p>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estructura Dispersa (Periodo 2024–2027)</th>
+                        <th>Nueva Coordinación Austera (Propuesta Demo 2027)</th>
+                        <th>Impacto y Sustento Legal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dirección de Obras Públicas + Dirección de Desarrollo Urbano + Dirección de Movilidad Urbana + Catastro</td>
+                        <td><strong>1. Coordinación General de Infraestructura, Ordenamiento Territorial y Movilidad</strong></td>
+                        <td><span class="badge-ahorro">-3 Direcciones de Confianza</span><br>Unifica planeación vial, licencias y obra pública (Art. 89 Ley de Gobierno).</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección de Servicios Públicos + Alumbrado + Aseo Urbano + Parques y Jardines + Cementerios</td>
+                        <td><strong>2. Coordinación General de Servicios Públicos y Entorno Digno</strong></td>
+                        <td><span class="badge-ahorro">-4 Jefaturas Superiores</span><br>Mando único territorial por cuadrantes y comisarías de Kanasín.</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección de Desarrollo Social + Atención Ciudadana + Participación Ciudadana + Asuntos Religiosos</td>
+                        <td><strong>3. Coordinación de Bienestar, Participación Ciudadana y Comités Vecinales</strong></td>
+                        <td><span class="badge-ahorro">-3 Direcciones</span><br>Articula presupuesto participativo y asambleas comunitarias directas.</td>
+                    </tr>
+                    <tr>
+                        <td>Instituto Municipal de la Mujer + Dirección de Juventud + Dirección de Cultura + Dirección de Deportes</td>
+                        <td><strong>4. Coordinación de Igualdad Sustantiva, Juventudes, Cultura y Deporte</strong></td>
+                        <td><span class="badge-ahorro">-3 Direcciones</span><br>Programas transversales en espacios públicos sin duplicar nómina directiva.</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección de Desarrollo Económico + Dirección de Espectáculos + Comercio en Vía Pública</td>
+                        <td><strong>5. Coordinación de Economía Social, Abasto y Regulación Comercial</strong></td>
+                        <td><span class="badge-ahorro">-2 Direcciones</span><br>Ventanilla única digital para trámites y apoyo a emprendedores locales.</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección de Administración + Recursos Humanos + Adquisiciones + Comunicación Social</td>
+                        <td><strong>6. Secretaría de Administración Austera, Finanzas y Transparencia</strong></td>
+                        <td><span class="badge-ahorro">-3 Direcciones</span><br>Topes salariales, cero gastos suntuarios y compras consolidadas abiertas.</td>
